@@ -63,14 +63,38 @@ public class InsertPersonaActivity extends AppCompatActivity {
         String nombrePersonaIngresado = txtNombrePersona.getText().toString();
         String numeroContactoIngresado = txtNumeroContacto.getText().toString();
 
+
+
         appDatabase.databaseWriteExecutor.execute(() -> {
 
             if (idPersonaRecibido == -1) {
                 // INSERTAR NUEVA
-                Personas nuevaPersona = new Personas(nombrePersonaIngresado, numeroContactoIngresado);
-                db_conn.personas_dao().insertarPersona(nuevaPersona);
+                if (nombrePersonaIngresado.isEmpty() || numeroContactoIngresado.isEmpty()){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(InsertPersonaActivity.this, "Ingresa el nombre y el numero de la persona", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return;
+                }
+                else {
+                    Personas nuevaPersona = new Personas(nombrePersonaIngresado, numeroContactoIngresado);
+                    db_conn.personas_dao().insertarPersona(nuevaPersona);
+                }
+
             } else {
                 // ACTUALIZAR EXISTENTE
+                if (nombrePersonaIngresado.isEmpty() || numeroContactoIngresado.isEmpty()){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(InsertPersonaActivity.this, "Ingresa el nombre y el numero de la persona", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                    return;
+                }
                 Personas personaEditada = new Personas(nombrePersonaIngresado, numeroContactoIngresado);
                 personaEditada.idPersona = idPersonaRecibido;
                 db_conn.personas_dao().actualizarPersona(personaEditada);

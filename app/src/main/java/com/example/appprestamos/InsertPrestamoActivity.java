@@ -100,8 +100,11 @@ public class InsertPrestamoActivity extends AppCompatActivity {
                 }
 
                 ArrayAdapter<Articulos> adapterArticulos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listaArticulos);
+                adapterArticulos.setDropDownViewResource(R.layout.spinner_dropdown_item);
+
                 spArticulos.setAdapter(adapterArticulos);
                 ArrayAdapter<Personas> adapterPersonas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listaPersonas);
+                adapterPersonas.setDropDownViewResource(R.layout.spinner_dropdown_item);
                 spPersonas.setAdapter(adapterPersonas);
             });
         });
@@ -149,6 +152,7 @@ public class InsertPrestamoActivity extends AppCompatActivity {
 
         Articulos articuloSeleccionado = (Articulos) spArticulos.getSelectedItem();
         Personas personaSeleccionada = (Personas) spPersonas.getSelectedItem();
+
 
         // variables finales para poder usarlas dentro del hilo en segundo plano
         final Date finalDateInicio = dateInicio;

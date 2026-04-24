@@ -15,7 +15,7 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Listado de Articulos Disponibles"
+            android:text="Listado de Articulos"
             android:textAlignment="center"
             android:textAppearance="@style/Text.title"
             app:layout_constraintBottom_toTopOf="@+id/cardTablaArticulos"

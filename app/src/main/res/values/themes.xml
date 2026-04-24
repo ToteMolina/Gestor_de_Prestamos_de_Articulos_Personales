@@ -24,6 +24,9 @@
         <item name="colorOnSecondaryContainer">@color/white</item>
 
         <item name="colorOnSurfaceVariant">@color/brand_primary</item>
+
+
+
     </style>
 
     <style name="Theme.AppPrestamos" parent="Base.Theme.AppPrestamos" />

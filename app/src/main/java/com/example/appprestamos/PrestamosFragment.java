@@ -90,11 +90,11 @@ public class PrestamosFragment extends Fragment {
 
     private void actualizarColoresBotones(){
         if (viendoActivos){
-            btnVerActivos.setBackgroundColor(Color.parseColor("#FF6A3D"));
-            btnVerHistorial.setBackgroundColor(Color.parseColor("#7A7A7A"));
+            btnVerActivos.setBackgroundColor(Color.parseColor("#574C46"));
+            btnVerHistorial.setBackgroundColor(Color.parseColor("#7AB4D8"));
         } else {
-            btnVerActivos.setBackgroundColor(Color.parseColor("#7A7A7A"));
-            btnVerHistorial.setBackgroundColor(Color.parseColor("#FF6A3D"));
+            btnVerActivos.setBackgroundColor(Color.parseColor("#7AB4D8"));
+            btnVerHistorial.setBackgroundColor(Color.parseColor("#574C46"));
         }
     }
 
