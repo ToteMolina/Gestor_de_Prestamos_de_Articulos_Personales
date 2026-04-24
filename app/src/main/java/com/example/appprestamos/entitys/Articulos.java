@@ -15,4 +15,9 @@ public class Articulos {
     public String nombre; // para migración version 2
     public String descripcion;
     public int idCategoria;
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
