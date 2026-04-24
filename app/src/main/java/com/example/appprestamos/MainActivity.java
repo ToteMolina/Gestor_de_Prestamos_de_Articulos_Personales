@@ -39,20 +39,20 @@ public class MainActivity extends AppCompatActivity {
           });*/
 
         navigationView = findViewById(R.id.menuBotton);
-        loadFragment(new HomeFragment());
+        loadFragment(new ArticulosFragment());
 
         navigationView.setOnItemSelectedListener(item -> {
             item.setCheckable(true);
-            if (item.getItemId() == R.id.home){
-                Toast.makeText(this, "Ejemplo 1", Toast.LENGTH_SHORT).show();
+            if (item.getItemId() == R.id.personas){
+                Toast.makeText(this, "Personas", Toast.LENGTH_SHORT).show();
                 loadFragment(new HomeFragment());
                 return true;
             } else if (item.getItemId() == R.id.articulos){
                 Toast.makeText(this, "Articulos", Toast.LENGTH_SHORT).show();
                 loadFragment(new ArticulosFragment());
                 return true;
-            } else if (item.getItemId() == R.id.categorias){
-                Toast.makeText(this, "Categorias", Toast.LENGTH_SHORT).show();
+            } else if (item.getItemId() == R.id.prestamos){
+                Toast.makeText(this, "Prestamos", Toast.LENGTH_SHORT).show();
                 loadFragment(new CategoriasFragment());
                 return true;
             }
