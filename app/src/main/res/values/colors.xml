@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="surface_bg">#F5F3EF</color>
+    <color name="surface_bg">#E5EDE6</color>
     <color name="surface_card">#FFFFFF</color>
-    <color name="surface_stroke">#E7E3DC</color>
-    <color name="surface_chip">#EFEDE8</color>
-
-    <color name="text_primary">#1F1F1F</color>
-    <color name="text_secondary">#7A7A7A</color>
-    <color name="text_hint">#A0A0A0</color>
+    <color name="surface_stroke">#D5D8AE</color>
+    <color name="surface_chip">#D5D8AE</color>
+    <color name="text_primary">#574C46</color>
+    <color name="text_secondary">#669799</color>
+    <color name="text_hint">#D5D8AE</color>
     <color name="text_on_primary">#FFFFFF</color>
-
-    <color name="brand_primary">#111111</color>
-    <color name="brand_secondary">#2D2D2D</color>
-    <color name="brand_accent">#FF6A3D</color>
-
-    <color name="state_error">#E25544</color>
-    <color name="state_warning">#F59E0B</color>
-    <color name="state_success">#22C55E</color>
-    <color name="state_info">#3B82F6</color>
-
-    <color name="loan_available">#22C55E</color>
-    <color name="loan_borrowed">#3B82F6</color>
-    <color name="loan_overdue">#E25544</color>
-    <color name="loan_reserved">#8B5CF6</color>
-
-    <color name="black_soft">#2B2B2B</color>
-    <color name="divider">#ECEAE6</color>
+    <color name="brand_primary">#574C46</color>
+    <color name="brand_secondary">#669799</color>
+    <color name="brand_accent">#7AB4D8</color>
+    <color name="state_error">#cc0022</color>
+    <color name="state_warning">#ffcc00</color>
+    <color name="state_success">#00b300</color>
+    <color name="state_info">#002db3</color>
+    <color name="loan_available">#669799</color>
+    <color name="loan_borrowed">#7AB4D8</color>
+    <color name="loan_overdue">#574C46</color>
+    <color name="loan_reserved">#D5D8AE</color>
+    <color name="black_soft">#574C46</color>
+    <color name="divider">#E5EDE6</color>
     <color name="white">#FFFFFF</color>
-
+    <color name="black">#000000</color>
 </resources>
