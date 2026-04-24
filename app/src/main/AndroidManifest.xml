@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppPrestamos">
         <activity
+            android:name=".InsertPersonaActivity"
+            android:exported="false" />
+        <activity
             android:name=".InsertProductoActivity"
             android:exported="false" />
         <activity

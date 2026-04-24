@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             item.setCheckable(true);
             if (item.getItemId() == R.id.personas){
                 Toast.makeText(this, "Personas", Toast.LENGTH_SHORT).show();
-                loadFragment(new HomeFragment());
+                loadFragment(new PersonaFragment());
                 return true;
             } else if (item.getItemId() == R.id.articulos){
                 Toast.makeText(this, "Articulos", Toast.LENGTH_SHORT).show();
