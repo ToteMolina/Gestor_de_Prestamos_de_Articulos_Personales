@@ -12,11 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppPrestamos">
         <activity
-<<<<<<< HEAD
-            android:name=".InsertPrestamoActivity"
-=======
             android:name=".InsertPersonaActivity"
->>>>>>> origin/fatima
             android:exported="false" />
         <activity
             android:name=".InsertProductoActivity"
@@ -30,6 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".InsertPrestamoActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
