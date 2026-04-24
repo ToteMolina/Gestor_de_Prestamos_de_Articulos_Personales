@@ -12,6 +12,7 @@ import androidx.room.PrimaryKey;
 public class Articulos {
     @PrimaryKey(autoGenerate = true)
     public int idArticulos;
+    public String nombre; // para migración version 2
     public String descripcion;
     public int idCategoria;
 }

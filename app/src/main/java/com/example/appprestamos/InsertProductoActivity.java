@@ -28,6 +28,7 @@ public class InsertProductoActivity extends AppCompatActivity {
     public CategoriaAdapter adapter;
     public Categorias categorias;
     public TextInputEditText txtDescripcionArticulo;
+    public TextInputEditText txtNombreArticulo; // para migración version 2
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class InsertProductoActivity extends AppCompatActivity {
         });
         listCat = findViewById(R.id.list_categorias);
         txtDescripcionArticulo = findViewById(R.id.txtDescripcion);
+        txtNombreArticulo = findViewById(R.id.txtNombreArticulo); // para migración version 2
 
         db_conn = appDatabase.getInstance(getApplicationContext());
         appDatabase.databaseWriteExecutor.execute(()->{
@@ -65,15 +67,14 @@ public class InsertProductoActivity extends AppCompatActivity {
     public void insertArticulo(View view) {
         appDatabase.databaseWriteExecutor.execute(()->{
             Articulos articulos = new Articulos();
+            articulos.nombre = txtNombreArticulo.getText().toString(); // para migración version 2
             articulos.descripcion = txtDescripcionArticulo.getText().toString();
             articulos.idCategoria = categorias.idCategoria;
-            db_conn.articulos_dao().insertArticulos(articulos);
-            //db_conn.categoria_dao().insertCategoria(new Categorias("Cargadores"));
 
+            db_conn.articulos_dao().insertArticulos(articulos);
 
             runOnUiThread(()->{
                 Toast.makeText(this, "Dato Insertado", Toast.LENGTH_SHORT).show();
-
             });
         });
     }

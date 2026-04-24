@@ -1,0 +1,83 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "7c52de3108dee86b1e7c25da0110e054",
+    "entities": [
+      {
+        "tableName": "categorias",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idCategoria` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombreCategoria` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idCategoria",
+            "columnName": "idCategoria",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombreCategoria",
+            "columnName": "nombreCategoria",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "idCategoria"
+          ]
+        }
+      },
+      {
+        "tableName": "articulos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idArticulos` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT, `descripcion` TEXT, `idCategoria` INTEGER NOT NULL, FOREIGN KEY(`idCategoria`) REFERENCES `categorias`(`idCategoria`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "idArticulos",
+            "columnName": "idArticulos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "descripcion",
+            "columnName": "descripcion",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "idCategoria",
+            "columnName": "idCategoria",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "idArticulos"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "categorias",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idCategoria"
+            ],
+            "referencedColumns": [
+              "idCategoria"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7c52de3108dee86b1e7c25da0110e054')"
+    ]
+  }
+}
