@@ -56,7 +56,7 @@ public class PersonaAdapter extends RecyclerView.Adapter<PersonaAdapter.PersonaV
         holder.itemView.setOnLongClickListener(v -> {
             new AlertDialog.Builder(context)
                     .setTitle("Eliminar contacto")
-                    .setMessage("¿Estás segura de eliminar a " + personas.nombrePersona + "?")
+                    .setMessage("¿Estás seguro de eliminar a " + personas.nombrePersona + "?")
                     .setNegativeButton("Cancelar", null)
                     .setPositiveButton("Eliminar", (dialog, which) -> {
 
@@ -78,7 +78,7 @@ public class PersonaAdapter extends RecyclerView.Adapter<PersonaAdapter.PersonaV
                                 ((Activity) context).runOnUiThread(() -> {
                                     new AlertDialog.Builder(context)
                                             .setTitle("Error al eliminar")
-                                            .setMessage("No puedes eliminar a esta persona porque tiene préstamos registrados. Borra primero sus préstamos.")
+                                            .setMessage("No puedes eliminar a esta persona porque tiene préstamos registrados.")
                                             .setPositiveButton("Entendido", null)
                                             .show();
                                 });
