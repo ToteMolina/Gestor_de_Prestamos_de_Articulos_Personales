@@ -1,5 +1,6 @@
 package com.example.appprestamos.entitys;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -15,6 +16,7 @@ public class Articulos {
     public String nombre; // para migración version 2
     public String descripcion;
     public int idCategoria;
+    public String estado = "Disponible";
 
     @Override
     public String toString() {

@@ -53,7 +53,7 @@ public class InsertProductoActivity extends AppCompatActivity {
             runOnUiThread(()->{
                 //Toast.makeText(this, "Datos Insertados", Toast.LENGTH_SHORT).show();
                 adapter = new CategoriaAdapter(getApplicationContext(), categoriaData, categoria -> {
-                    Toast.makeText(this, "id de la categoria"+String.valueOf(categoria.idCategoria), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Categoria Seleccionada: "+String.valueOf(categoria.nombreCategoria), Toast.LENGTH_SHORT).show();
                     categorias = categoria;
                 });
                 listCat.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
