@@ -1,0 +1,181 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "31e0d07b8526ba3d5e136a3609eb3769",
+    "entities": [
+      {
+        "tableName": "categorias",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idCategoria` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombreCategoria` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idCategoria",
+            "columnName": "idCategoria",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombreCategoria",
+            "columnName": "nombreCategoria",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "idCategoria"
+          ]
+        }
+      },
+      {
+        "tableName": "articulos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idArticulos` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT, `descripcion` TEXT, `idCategoria` INTEGER NOT NULL, FOREIGN KEY(`idCategoria`) REFERENCES `categorias`(`idCategoria`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "idArticulos",
+            "columnName": "idArticulos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "descripcion",
+            "columnName": "descripcion",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "idCategoria",
+            "columnName": "idCategoria",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "idArticulos"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "categorias",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idCategoria"
+            ],
+            "referencedColumns": [
+              "idCategoria"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "personas",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idPersona` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombrePersona` TEXT, `numeroContacto` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idPersona",
+            "columnName": "idPersona",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombrePersona",
+            "columnName": "nombrePersona",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "numeroContacto",
+            "columnName": "numeroContacto",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "idPersona"
+          ]
+        }
+      },
+      {
+        "tableName": "prestamos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idPrestamos` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idArticulos` INTEGER NOT NULL, `idPersona` INTEGER NOT NULL, `fechaPrestamo` INTEGER, `fechaDevoEstimada` INTEGER, `devuelto` INTEGER NOT NULL, FOREIGN KEY(`idArticulos`) REFERENCES `articulos`(`idArticulos`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`idPersona`) REFERENCES `personas`(`idPersona`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "idPrestamos",
+            "columnName": "idPrestamos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idArticulos",
+            "columnName": "idArticulos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idPersona",
+            "columnName": "idPersona",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaPrestamo",
+            "columnName": "fechaPrestamo",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "fechaDevoEstimada",
+            "columnName": "fechaDevoEstimada",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "devuelto",
+            "columnName": "devuelto",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "idPrestamos"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "articulos",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idArticulos"
+            ],
+            "referencedColumns": [
+              "idArticulos"
+            ]
+          },
+          {
+            "table": "personas",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idPersona"
+            ],
+            "referencedColumns": [
+              "idPersona"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '31e0d07b8526ba3d5e136a3609eb3769')"
+    ]
+  }
+}

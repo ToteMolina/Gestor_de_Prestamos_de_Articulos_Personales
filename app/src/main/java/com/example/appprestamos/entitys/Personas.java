@@ -14,4 +14,9 @@ public class Personas {
         this.nombrePersona = nombrePersona;
         this.numeroContacto = numeroContacto;
     }
+
+    @Override
+    public String toString() {
+        return nombrePersona;
+    }
 }

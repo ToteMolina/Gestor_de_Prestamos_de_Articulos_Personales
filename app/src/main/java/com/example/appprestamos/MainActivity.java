@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setOnItemSelectedListener(item -> {
             item.setCheckable(true);
 
-
             if (item.getItemId() == R.id.personas){
                 Toast.makeText(this, "Personas", Toast.LENGTH_SHORT).show();
                 loadFragment(new PersonaFragment());
@@ -53,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(new ArticulosFragment());
                 return true;
             } else if (item.getItemId() == R.id.prestamos){
-                Toast.makeText(this, "Prestamos", Toast.LENGTH_SHORT).show();
-                loadFragment(new CategoriasFragment());
+                loadFragment(new PrestamosFragment());
                 return true;
             }
             return false;
