@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.appprestamos.AppDatabasePackage.appDatabase;
 import com.example.appprestamos.entitys.Categorias;
+import com.example.appprestamos.entitys.Personas;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,14 +30,13 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         //prueba de base de datos
-//        db_conn = appDatabase.getInstance(getApplicationContext());
-//        appDatabase.databaseWriteExecutor.execute(()->{
-//            db_conn.categoria_dao().insertCategoria(new Categorias("Cargadores"));
-//            runOnUiThread(()->{
-//                Toast.makeText(this, "Datos Insertados", Toast.LENGTH_SHORT).show();
-//            });
-//        });
-
+        /*db_conn = appDatabase.getInstance(getApplicationContext());
+        appDatabase.databaseWriteExecutor.execute(()->{
+            db_conn.personas_dao().insertarPersona(new Personas("Fatima Márquez", "6038 7163"));
+            runOnUiThread(()->{
+               Toast.makeText(this, "Datos Insertados", Toast.LENGTH_SHORT).show();
+            });
+          });*/
 
         navigationView = findViewById(R.id.menuBotton);
         loadFragment(new HomeFragment());
