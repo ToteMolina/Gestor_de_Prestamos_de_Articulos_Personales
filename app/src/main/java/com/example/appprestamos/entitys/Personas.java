@@ -10,6 +10,9 @@ public class Personas {
     public String nombrePersona;
     public String numeroContacto;
 
+    public Personas() {
+    }
+
     public Personas(String nombrePersona, String numeroContacto) {
         this.nombrePersona = nombrePersona;
         this.numeroContacto = numeroContacto;
