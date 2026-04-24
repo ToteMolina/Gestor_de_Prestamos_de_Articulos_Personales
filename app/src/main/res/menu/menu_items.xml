@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/home"
+        android:title="Home">
+    </item>
+
+    <item
+        android:id="@+id/articulos"
+        android:enabled="true"
+        android:icon="@drawable/articulo"
+        android:title="Articulos">
+    </item>
+
+    <item
+        android:id="@+id/categorias"
+        android:enabled="true"
+        android:icon="@drawable/category"
+        android:title="Categorias">
+    </item>
+</menu>
