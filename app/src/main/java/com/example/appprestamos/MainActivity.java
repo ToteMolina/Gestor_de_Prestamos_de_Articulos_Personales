@@ -29,14 +29,6 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        //prueba de base de datos
-//        db_conn = appDatabase.getInstance(getApplicationContext());
-//        appDatabase.databaseWriteExecutor.execute(()->{
-//           db_conn.categoria_dao().insertCategoria(new Categorias("Cargadores"));
-//           runOnUiThread(()->{
-//               Toast.makeText(this, "Datos Insertados", Toast.LENGTH_SHORT).show();
-//            });
-//       });
 
         navigationView = findViewById(R.id.menuBotton);
         loadFragment(new ArticulosFragment());
@@ -45,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
             item.setCheckable(true);
 
             if (item.getItemId() == R.id.personas){
-                Toast.makeText(this, "Personas", Toast.LENGTH_SHORT).show();
                 loadFragment(new PersonaFragment());
                 return true;
             } else if (item.getItemId() == R.id.articulos){
