@@ -1,5 +1,6 @@
 package com.example.appprestamos.Adaptadores;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -43,10 +44,9 @@ public class PersonaAdapter extends RecyclerView.Adapter<PersonaAdapter.PersonaV
         holder.txtNombrePersona.setText(personas.nombrePersona);
         holder.txtNumeroContacto.setText(personas.numeroContacto);
 
+
         holder.itemView.setOnClickListener(v -> {
-
             Intent intent = new Intent(holder.itemView.getContext(), InsertPersonaActivity.class);
-
             intent.putExtra("ID_PERSONA", personas.idPersona);
             intent.putExtra("NOMBRE", personas.nombrePersona);
             intent.putExtra("NUMERO", personas.numeroContacto);
@@ -60,20 +60,34 @@ public class PersonaAdapter extends RecyclerView.Adapter<PersonaAdapter.PersonaV
                     .setNegativeButton("Cancelar", null)
                     .setPositiveButton("Eliminar", (dialog, which) -> {
 
-                        dataPersonas.remove(position);
-                        notifyItemRemoved(position);
 
                         appDatabase.databaseWriteExecutor.execute(() -> {
-                            appDatabase.getInstance(context).personas_dao().eliminarPersona(personas);
+                            try {
+
+                                appDatabase.getInstance(context).personas_dao().eliminarPersona(personas);
+
+
+                                ((Activity) context).runOnUiThread(() -> {
+                                    dataPersonas.remove(position);
+                                    notifyItemRemoved(position);
+                                    android.widget.Toast.makeText(context, "Persona eliminada", android.widget.Toast.LENGTH_SHORT).show();
+                                });
+
+                            } catch (Exception e) {
+
+                                ((Activity) context).runOnUiThread(() -> {
+                                    new AlertDialog.Builder(context)
+                                            .setTitle("Error al eliminar")
+                                            .setMessage("No puedes eliminar a esta persona porque tiene préstamos registrados. Borra primero sus préstamos.")
+                                            .setPositiveButton("Entendido", null)
+                                            .show();
+                                });
+                            }
                         });
-                        android.widget.Toast.makeText(context, "Persona eliminada", android.widget.Toast.LENGTH_SHORT).show();
                     })
                     .show();
-
             return true;
         });
-
-
     }
 
     @Override
