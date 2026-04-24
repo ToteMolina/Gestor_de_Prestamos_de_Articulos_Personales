@@ -1,6 +1,7 @@
 package com.example.appprestamos;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.appprestamos.Adaptadores.PrestamoAdapter;
 import com.example.appprestamos.AppDatabasePackage.appDatabase;
@@ -114,7 +116,29 @@ public class PrestamosFragment extends Fragment {
                             getContext(),
                             listaPrestamos,
                             listaArticulos,
-                            listaPersonas);
+                            listaPersonas,
+                            prestamoClickeado ->{
+                                new AlertDialog.Builder(getContext())
+                                        .setTitle("Finalizar préstamo")
+                                        .setMessage("¿Seguro que deseas marcar este artículo como devuelto? Esta acción lo moverá al historial")
+                                        .setPositiveButton("Sí, devolver", (dialog, which) -> {
+                                            appDatabase.databaseWriteExecutor.execute(()->{
+                                                prestamoClickeado.devuelto = true;
+                                                db_conn.prestamo_dao().updatePrestamo(prestamoClickeado);
+
+                                                db_conn.articulos_dao().actualizarEstado(prestamoClickeado.idArticulos, "Disponible");
+
+                                                getActivity().runOnUiThread(()->{
+                                                    cargarLista();
+                                                    Toast.makeText(getContext(), "Préstamo finalizado", Toast.LENGTH_SHORT).show();
+                                                });
+                                            });
+                                        })
+                                        .setNegativeButton("Cancelar", (dialog, which) -> {
+                                            dialog.dismiss();
+                                        })
+                                        .show();
+                            });
                     rvPrestamos.setAdapter(adapter);
                 });
             }
