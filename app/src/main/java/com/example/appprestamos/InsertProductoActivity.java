@@ -1,5 +1,6 @@
 package com.example.appprestamos;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -75,6 +76,8 @@ public class InsertProductoActivity extends AppCompatActivity {
 
             runOnUiThread(()->{
                 Toast.makeText(this, "Dato Insertado", Toast.LENGTH_SHORT).show();
+                setResult(Activity.RESULT_OK);
+                finish();
             });
         });
     }

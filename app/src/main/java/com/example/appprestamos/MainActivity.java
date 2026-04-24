@@ -30,25 +30,26 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         //prueba de base de datos
-        /*db_conn = appDatabase.getInstance(getApplicationContext());
-        appDatabase.databaseWriteExecutor.execute(()->{
-            db_conn.personas_dao().insertarPersona(new Personas("Fatima Márquez", "6038 7163"));
-            runOnUiThread(()->{
-               Toast.makeText(this, "Datos Insertados", Toast.LENGTH_SHORT).show();
-            });
-          });*/
+//        db_conn = appDatabase.getInstance(getApplicationContext());
+//        appDatabase.databaseWriteExecutor.execute(()->{
+//            db_conn.categoria_dao().insertCategoria(new Categorias("Cargadores"));
+//            runOnUiThread(()->{
+//                Toast.makeText(this, "Datos Insertados", Toast.LENGTH_SHORT).show();
+//            });
+//        });
 
         navigationView = findViewById(R.id.menuBotton);
         loadFragment(new ArticulosFragment());
 
         navigationView.setOnItemSelectedListener(item -> {
             item.setCheckable(true);
+
+
             if (item.getItemId() == R.id.personas){
                 Toast.makeText(this, "Personas", Toast.LENGTH_SHORT).show();
                 loadFragment(new PersonaFragment());
                 return true;
             } else if (item.getItemId() == R.id.articulos){
-                Toast.makeText(this, "Articulos", Toast.LENGTH_SHORT).show();
                 loadFragment(new ArticulosFragment());
                 return true;
             } else if (item.getItemId() == R.id.prestamos){
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(new CategoriasFragment());
                 return true;
             }
-
             return false;
         });
     }
