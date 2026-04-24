@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppPrestamos">
         <activity
+<<<<<<< HEAD
             android:name=".InsertPrestamoActivity"
+=======
+            android:name=".InsertPersonaActivity"
+>>>>>>> origin/fatima
             android:exported="false" />
         <activity
             android:name=".InsertProductoActivity"

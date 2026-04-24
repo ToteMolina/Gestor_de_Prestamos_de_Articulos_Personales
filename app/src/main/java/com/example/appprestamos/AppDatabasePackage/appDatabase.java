@@ -15,6 +15,7 @@ import com.example.appprestamos.DAOS.articulosDAO;
 import com.example.appprestamos.DAOS.categoriaDAO;
 import com.example.appprestamos.DAOS.personaDAO;
 import com.example.appprestamos.DAOS.prestamoDAO;
+import com.example.appprestamos.Migraciones.Migraciones;
 import com.example.appprestamos.entitys.Articulos;
 import com.example.appprestamos.entitys.Categorias;
 import com.example.appprestamos.entitys.Personas;
@@ -48,39 +49,6 @@ public abstract class appDatabase extends RoomDatabase {
     private static volatile appDatabase INSTANCE;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(4);
 
-
-    // para migración version 2, para agregar la columna nombre
-    public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-        @Override
-        public void migrate(@NonNull SupportSQLiteDatabase db) {
-            db.execSQL("ALTER TABLE articulos ADD COLUMN nombre TEXT");
-        }
-    };
-        //para migracion 3, para agregar tabla de personas
-    public static final Migration MIGRATION_2_3 = new Migration(2, 3) {
-        @Override
-        public void migrate(@NonNull SupportSQLiteDatabase db) {
-            db.execSQL("CREATE TABLE IF NOT EXISTS `personas` (`idPersona` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                    "`nombrePersona` TEXT, `numeroContacto` TEXT)");
-        }
-    };
-
-    // para migración 4, agregando tabla de prestamos
-    public static final Migration MIGRATION_3_4 = new Migration(3, 4) {
-        @Override
-        public void migrate(@NonNull SupportSQLiteDatabase db) {
-            db.execSQL("CREATE TABLE IF NOT EXISTS 'prestamos' (" +
-                    "'idPrestamos' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                    "'idArticulos' INTEGER NOT NULL, " +
-                    "'idPersona' INTEGER NOT NULL, " +
-                    "'fechaPrestamo' INTEGER, " +
-                    "'fechaDevoEstimada' INTEGER, " +
-                    "'devuelto' INTEGER NOT NULL, " +
-                    "FOREIGN KEY('idArticulos') REFERENCES 'articulos'('idArticulos') ON UPDATE NO ACTION ON DELETE RESTRICT , " +
-                    "FOREIGN KEY(`idPersona`) REFERENCES `personas`(`idPersona`) ON UPDATE NO ACTION ON DELETE RESTRICT )");
-        }
-    };
-
     public static appDatabase getInstance(Context context){
         if (INSTANCE == null){
             synchronized (appDatabase.class){
@@ -90,7 +58,7 @@ public abstract class appDatabase extends RoomDatabase {
                             appDatabase.class,
                             "db_prestamos"
                     )
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+                            .addMigrations(Migraciones.MIGRATION_1_2, Migraciones.MIGRATION_2_3, Migraciones.MIGRATION_3_4)
                             .build();
                 }
             }
