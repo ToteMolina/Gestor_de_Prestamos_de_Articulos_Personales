@@ -1,5 +1,6 @@
 package com.example.appprestamos;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -47,17 +49,43 @@ public class InsertPrestamoActivity extends AppCompatActivity {
         txtFechaPrestamo = findViewById(R.id.txtFechaPrestamo);
         txtFechaDevo = findViewById(R.id.txtFechaDevo);
 
+        txtFechaPrestamo.setOnClickListener(v->{
+            mostrarCalendario(txtFechaPrestamo);
+        });
+        txtFechaDevo.setOnClickListener(v->{
+            mostrarCalendario(txtFechaDevo);
+        });
+
         db_conn = appDatabase.getInstance(getApplicationContext());
 
         cargarDatosSpinners();
     }
 
+    private void mostrarCalendario(TextInputEditText editText){
+        // obtenemos la fecha actual para que el calendario empiece con la fecha de hoy
+        Calendar calendario = Calendar.getInstance();
+        int anio = calendario.get(Calendar.YEAR);
+        int mes = calendario.get(Calendar.MONTH);
+        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dpd = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+            String fechaSeleccionada = String.format(Locale.getDefault(), "%02d/%02d/%04d", dayOfMonth, (month+1), year);
+            editText.setText(fechaSeleccionada);
+        }, anio, mes, dia);
+        dpd.show();
+    }
+
     private void cargarDatosSpinners() {
         appDatabase.databaseWriteExecutor.execute(()->{
-            listaArticulos = db_conn.articulos_dao().getAllArticulos();
+            listaArticulos = db_conn.articulos_dao().getArticulosDisponibles();
             listaPersonas = db_conn.personas_dao().getAllPersonas();
 
             runOnUiThread(()->{
+                if (listaArticulos.isEmpty()){
+                    Toast.makeText(this, "No hay artículos disponibles para prestar", Toast.LENGTH_SHORT).show();
+                    findViewById(R.id.btnGuardarPrestamo).setEnabled(false);
+                }
+
                 ArrayAdapter<Articulos> adapterArticulos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listaArticulos);
                 spArticulos.setAdapter(adapterArticulos);
                 ArrayAdapter<Personas> adapterPersonas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listaPersonas);
@@ -108,9 +136,8 @@ public class InsertPrestamoActivity extends AppCompatActivity {
             nuevoPrestamo.fechaDevoEstimada = finalDateDevo;
             nuevoPrestamo.devuelto = false;
 
-
-            db_conn.articulos_dao().actualizarEstado(articuloSeleccionado.idArticulos, "Prestado");
             db_conn.prestamo_dao().insertPrestamo(nuevoPrestamo);
+            db_conn.articulos_dao().actualizarEstado(articuloSeleccionado.idArticulos, "Prestado");
 
             runOnUiThread(()->{
                 Toast.makeText(this, "Préstamo Registrado con Éxito", Toast.LENGTH_SHORT).show();

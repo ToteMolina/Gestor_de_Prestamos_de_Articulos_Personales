@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:background="@color/surface_chip">
 
     <TextView
         android:id="@+id/tvArticulo"
@@ -17,7 +18,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnDevolver"/>
 
     <TextView
         android:id="@+id/tvPersona"
@@ -28,7 +30,8 @@
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvArticulo" />
+        app:layout_constraintTop_toBottomOf="@+id/tvArticulo"
+        app:layout_constraintEnd_toStartOf="@id/btnDevolver"/>/>
 
     <TextView
         android:id="@+id/tvFechaDevo"
@@ -40,5 +43,16 @@
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPersona" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPersona"
+        app:layout_constraintEnd_toStartOf="@id/btnDevolver"/>/>
+
+    <Button
+        android:id="@+id/btnDevolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Devolver"
+        android:backgroundTint="@color/state_warning"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

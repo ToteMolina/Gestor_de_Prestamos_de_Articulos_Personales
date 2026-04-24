@@ -20,4 +20,7 @@ public interface articulosDAO {
     List<Articulos> getPrestados();
     @Query("UPDATE articulos SET estado = :nuevoEstado WHERE idArticulos = :id")
     void actualizarEstado(int id, String nuevoEstado);
+
+    @Query("SELECT * FROM articulos WHERE idArticulos NOT IN (SELECT idArticulos FROM prestamos WHERE devuelto = 0)")
+    List<Articulos> getArticulosDisponibles();
 }

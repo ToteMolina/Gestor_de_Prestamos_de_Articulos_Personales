@@ -66,6 +66,12 @@ public class InsertProductoActivity extends AppCompatActivity {
     }
 
     public void insertArticulo(View view) {
+
+        if(categorias == null){
+            Toast.makeText(this, "Por favor, selecciona una categoría de la lista", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         appDatabase.databaseWriteExecutor.execute(()->{
             Articulos articulos = new Articulos();
             articulos.nombre = txtNombreArticulo.getText().toString(); // para migración version 2
