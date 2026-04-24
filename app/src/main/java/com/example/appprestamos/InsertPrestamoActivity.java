@@ -108,6 +108,8 @@ public class InsertPrestamoActivity extends AppCompatActivity {
             nuevoPrestamo.fechaDevoEstimada = finalDateDevo;
             nuevoPrestamo.devuelto = false;
 
+
+            db_conn.articulos_dao().actualizarEstado(articuloSeleccionado.idArticulos, "Prestado");
             db_conn.prestamo_dao().insertPrestamo(nuevoPrestamo);
 
             runOnUiThread(()->{

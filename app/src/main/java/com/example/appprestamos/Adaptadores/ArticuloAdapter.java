@@ -1,6 +1,7 @@
 package com.example.appprestamos.Adaptadores;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,16 @@ public class ArticuloAdapter extends RecyclerView.Adapter<ArticuloAdapter.Articu
 
         holder.tvNombreArticulo.setText(articulo.nombre);
         holder.tvDescripcion.setText(articulo.descripcion);
+        if(articulo.estado.equals("Disponible"))
+        {
+            holder.tvEstado.setTextColor(Color.parseColor("#00b300"));
+            holder.tvEstado.setText(articulo.estado);
+        }
+        else if(articulo.estado.equals("Prestado")){
+            holder.tvEstado.setTextColor(Color.parseColor("#cc0022"));
+            holder.tvEstado.setText(articulo.estado);
+        }
+
     }
 
     @Override
@@ -46,10 +57,12 @@ public class ArticuloAdapter extends RecyclerView.Adapter<ArticuloAdapter.Articu
     public class ArticuloVH extends RecyclerView.ViewHolder {
         public TextView tvNombreArticulo;
         public TextView tvDescripcion;
+        public TextView tvEstado;
         public ArticuloVH(@NonNull View itemView) {
             super(itemView);
             tvNombreArticulo = itemView.findViewById(R.id.tvNombreArticulo);
             tvDescripcion = itemView.findViewById(R.id.tvDescripcion);
+            tvEstado = itemView.findViewById(R.id.txtEstadoArticulo);
         }
     }
 }

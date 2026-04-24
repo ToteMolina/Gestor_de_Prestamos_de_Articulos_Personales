@@ -12,7 +12,12 @@ import java.util.List;
 public interface articulosDAO {
     @Query("SELECT * FROM articulos")
     List<Articulos> getAllArticulos();
-
     @Insert
     long insertArticulos(Articulos articulos);
+    @Query("SELECT * FROM articulos WHERE estado = 'Disponible'")
+    List<Articulos> getDisponibles();
+    @Query("SELECT * FROM articulos WHERE estado = 'Prestado'")
+    List<Articulos> getPrestados();
+    @Query("UPDATE articulos SET estado = :nuevoEstado WHERE idArticulos = :id")
+    void actualizarEstado(int id, String nuevoEstado);
 }

@@ -35,4 +35,11 @@ public class Migraciones {
                     "FOREIGN KEY(`idPersona`) REFERENCES `personas`(`idPersona`) ON UPDATE NO ACTION ON DELETE RESTRICT )");
         }
     };
+    // para migración 5, agregando columna de estado a tabla de articulos
+    public static final Migration MIGRATION_4_5 = new Migration(4, 5) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase db) {
+            db.execSQL("ALTER TABLE articulos ADD COLUMN estado TEXT DEFAULT 'Disponible'");
+        }
+    };
 }

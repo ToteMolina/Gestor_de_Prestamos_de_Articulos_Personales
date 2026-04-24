@@ -34,9 +34,14 @@ import java.util.concurrent.Executors;
 //        version = 3, // para migración version 3, se cambió de 2 a 3
 //        exportSchema = true
 //)
+//@Database(
+//        entities = {Categorias.class, Articulos.class, Personas.class, Prestamos.class},
+//        version = 4,
+//        exportSchema = true
+//)
 @Database(
         entities = {Categorias.class, Articulos.class, Personas.class, Prestamos.class},
-        version = 4,
+        version = 5,
         exportSchema = true
 )
 @TypeConverters({Converters.class}) // <- le decimos a Room que use nuestro converter
@@ -49,6 +54,26 @@ public abstract class appDatabase extends RoomDatabase {
     private static volatile appDatabase INSTANCE;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(4);
 
+    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
+        @Override
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
+        }
+
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            databaseWriteExecutor.execute(() -> {
+                appDatabase database = INSTANCE;
+                if(database != null){
+                    database.categoria_dao().insertCategoria(new Categorias("Herramientas"));
+                    database.categoria_dao().insertCategoria(new Categorias("Tecnología"));
+                    database.categoria_dao().insertCategoria(new Categorias("Mobiliario"));
+                    database.categoria_dao().insertCategoria(new Categorias("Libros"));
+                }
+            });
+        }
+    };
     public static appDatabase getInstance(Context context){
         if (INSTANCE == null){
             synchronized (appDatabase.class){
@@ -58,7 +83,9 @@ public abstract class appDatabase extends RoomDatabase {
                             appDatabase.class,
                             "db_prestamos"
                     )
-                            .addMigrations(Migraciones.MIGRATION_1_2, Migraciones.MIGRATION_2_3, Migraciones.MIGRATION_3_4)
+                            .addMigrations(Migraciones.MIGRATION_1_2, Migraciones.MIGRATION_2_3, Migraciones.MIGRATION_3_4
+                            ,Migraciones.MIGRATION_4_5)
+                            .addCallback(roomCallback)
                             .build();
                 }
             }
