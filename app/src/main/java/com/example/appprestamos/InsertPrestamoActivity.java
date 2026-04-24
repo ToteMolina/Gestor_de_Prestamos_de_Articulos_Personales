@@ -72,6 +72,7 @@ public class InsertPrestamoActivity extends AppCompatActivity {
             String fechaSeleccionada = String.format(Locale.getDefault(), "%02d/%02d/%04d", dayOfMonth, (month+1), year);
             editText.setText(fechaSeleccionada);
         }, anio, mes, dia);
+        dpd.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         dpd.show();
     }
 
@@ -118,6 +119,11 @@ public class InsertPrestamoActivity extends AppCompatActivity {
             dateDevo = sdf.parse(fechaDevoStr);
         } catch (ParseException e){
             Toast.makeText(this, "Formato de fecha incorrecto. Use DD/MM/AAAA", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (dateInicio.after(dateDevo)){
+            Toast.makeText(this, "Error, la fecha de devolución no puede ser anterior a la de préstamo", Toast.LENGTH_SHORT).show();
             return;
         }
 
