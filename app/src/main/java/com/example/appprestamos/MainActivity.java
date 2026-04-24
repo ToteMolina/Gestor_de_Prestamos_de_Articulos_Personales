@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.appprestamos.AppDatabasePackage.appDatabase;
 import com.example.appprestamos.entitys.Categorias;
+import com.example.appprestamos.entitys.Personas;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,17 +39,21 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         navigationView = findViewById(R.id.menuBotton);
-        loadFragment(new HomeFragment());
+        loadFragment(new ArticulosFragment());
 
         navigationView.setOnItemSelectedListener(item -> {
             item.setCheckable(true);
-            if (item.getItemId() == R.id.home){
+
+
+            if (item.getItemId() == R.id.personas){
+                Toast.makeText(this, "Personas", Toast.LENGTH_SHORT).show();
                 loadFragment(new HomeFragment());
                 return true;
             } else if (item.getItemId() == R.id.articulos){
                 loadFragment(new ArticulosFragment());
                 return true;
-            } else if (item.getItemId() == R.id.categorias){
+            } else if (item.getItemId() == R.id.prestamos){
+                Toast.makeText(this, "Prestamos", Toast.LENGTH_SHORT).show();
                 loadFragment(new CategoriasFragment());
                 return true;
             }

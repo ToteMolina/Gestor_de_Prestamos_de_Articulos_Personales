@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/home"
-        android:enabled="true"
-        android:icon="@drawable/home"
-        android:title="Home">
-    </item>
-
     <item
         android:id="@+id/articulos"
         android:enabled="true"
-        android:icon="@drawable/articulo"
+        android:icon="@drawable/articulos"
         android:title="Articulos">
     </item>
-
     <item
-        android:id="@+id/categorias"
+        android:id="@+id/personas"
         android:enabled="true"
-        android:icon="@drawable/category"
-        android:title="Categorias">
+        android:icon="@drawable/personas"
+        android:title="Personas">
+
+    </item>
+    <item
+        android:id="@+id/prestamos"
+        android:enabled="true"
+        android:icon="@drawable/prestamos"
+        android:title="Prestamos">
     </item>
 </menu>
