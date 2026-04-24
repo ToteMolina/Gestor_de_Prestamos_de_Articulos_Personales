@@ -72,6 +72,7 @@ public class InsertPrestamoActivity extends AppCompatActivity {
             String fechaSeleccionada = String.format(Locale.getDefault(), "%02d/%02d/%04d", dayOfMonth, (month+1), year);
             editText.setText(fechaSeleccionada);
         }, anio, mes, dia);
+        dpd.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         dpd.show();
     }
 
@@ -80,8 +81,20 @@ public class InsertPrestamoActivity extends AppCompatActivity {
             listaArticulos = db_conn.articulos_dao().getArticulosDisponibles();
             listaPersonas = db_conn.personas_dao().getAllPersonas();
 
+            Articulos articuloDefault = new Articulos();
+            articuloDefault.idArticulos = -1;
+            articuloDefault.nombre = "--- Seleccione un artículo ---";
+            listaArticulos.add(0, articuloDefault);
+
+            Personas personaDefault = new Personas();
+            personaDefault.idPersona = -1;
+            personaDefault.nombrePersona = "--- Seleccione una persona ---";
+            personaDefault.numeroContacto = "00000000";
+            listaPersonas.add(0, personaDefault);
+
             runOnUiThread(()->{
-                if (listaArticulos.isEmpty()){
+                // si la lista sólo tiene tamaño 1, significa que está en seleccione un articulo
+                if (listaArticulos.size() == 1){
                     Toast.makeText(this, "No hay artículos disponibles para prestar", Toast.LENGTH_SHORT).show();
                     findViewById(R.id.btnGuardarPrestamo).setEnabled(false);
                 }
@@ -95,9 +108,17 @@ public class InsertPrestamoActivity extends AppCompatActivity {
     }
 
     public void insertarPrestamo(View view){
-        if (spArticulos.getSelectedItem() == null || spPersonas.getSelectedItem() == null) {
-            Toast.makeText(this, "Debes registrar artículos y personas primero", Toast.LENGTH_SHORT).show();
+//        if (spArticulos.getSelectedItem() == null || spPersonas.getSelectedItem() == null) {
+//            Toast.makeText(this, "Debes registrar artículos y personas primero", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+
+        if (spArticulos.getSelectedItemPosition() == 0){
+            Toast.makeText(this, "Por favor seleccione un artículo de la lista", Toast.LENGTH_SHORT).show();
             return;
+        }
+        if (spPersonas.getSelectedItemPosition() == 0){
+            Toast.makeText(this, "Por favor seleccione la persona que recibe el préstamo", Toast.LENGTH_SHORT).show();
         }
 
         String fechaInicioStr = txtFechaPrestamo.getText().toString();
@@ -118,6 +139,11 @@ public class InsertPrestamoActivity extends AppCompatActivity {
             dateDevo = sdf.parse(fechaDevoStr);
         } catch (ParseException e){
             Toast.makeText(this, "Formato de fecha incorrecto. Use DD/MM/AAAA", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (dateInicio.after(dateDevo) || dateInicio.equals(dateDevo)){
+            Toast.makeText(this, "Error: El préstamo debe durar al menos hasta el día siguiente", Toast.LENGTH_SHORT).show();
             return;
         }
 
